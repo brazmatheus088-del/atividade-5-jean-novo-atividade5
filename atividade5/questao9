@@ -1,0 +1,76 @@
+clientes = []
+
+
+def cadastrar_cliente(clientes):
+    nome = input("Nome do cliente: ").strip()
+    telefone = input("Telefone: ").strip()
+    email = input("E-mail: ").strip()
+
+    if not nome or not telefone or not email:
+        print("Todos os campos são obrigatórios!")
+        return
+
+    cliente = {
+        "nome": nome,
+        "telefone": telefone,
+        "email": email
+    }
+
+    clientes.append(cliente)
+    print("Cliente cadastrado com sucesso!")
+
+
+def pesquisar_cliente(clientes):
+    nome_pesquisa = input("Digite o nome para pesquisar: ").strip().lower()
+
+    encontrado = False
+
+    for cliente in clientes:
+        if nome_pesquisa in cliente["nome"].lower():
+            print("\nCliente encontrado!")
+            print(f"Nome: {cliente['nome']}")
+            print(f"Telefone: {cliente['telefone']}")
+            print(f"E-mail: {cliente['email']}")
+
+            encontrado = True
+
+    if not encontrado:
+        print("Cliente não encontrado!")
+
+
+def listar_clientes(clientes):
+    print("\n--- CLIENTES CADASTRADOS ---")
+
+    if not clientes:
+        print("Nenhum cliente cadastrado.")
+    else:
+        for cliente in clientes:
+            print(f"\nNome: {cliente['nome']}")
+            print(f"Telefone: {cliente['telefone']}")
+            print(f"E-mail: {cliente['email']}")
+
+
+while True:
+    print("\n===== SISTEMA DE CLIENTES =====")
+    print("1 - Cadastrar cliente")
+    print("2 - Pesquisar cliente")
+    print("3 - Listar clientes")
+    print("4 - Encerrar programa")
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        cadastrar_cliente(clientes)
+
+    elif opcao == "2":
+        pesquisar_cliente(clientes)
+
+    elif opcao == "3":
+        listar_clientes(clientes)
+
+    elif opcao == "4":
+        print("Sistema encerrado!")
+        break
+
+    else:
+        print("Opção inválida!")

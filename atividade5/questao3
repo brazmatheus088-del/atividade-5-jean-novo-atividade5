@@ -1,0 +1,19 @@
+dados = 100
+
+print("Valor:", dados)
+print("Tipo:", type(dados))
+
+dados = "100"
+
+print("Valor:", dados)
+print("Tipo:", type(dados))
+
+
+def analisar_tipo(valor):
+    return type(valor).__name__
+
+
+print(analisar_tipo(10))
+print(analisar_tipo(5.5))
+print(analisar_tipo("Python"))
+print(analisar_tipo([1, 2, 3]))

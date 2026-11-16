@@ -1,0 +1,59 @@
+def calcular_total(carrinho):
+    total = 0
+
+    for produto in carrinho:
+        subtotal = produto["quantidade"] * produto["preco"]
+        total += subtotal
+
+    return total
+
+
+carrinho = []
+
+while True:
+    nome = input("\nNome do produto: ").strip()
+
+    while not nome:
+        print("Nome inválido!")
+        nome = input("Digite o nome do produto: ").strip()
+
+    try:
+        quantidade = int(input("Quantidade: "))
+        while quantidade <= 0:
+            print("A quantidade deve ser maior que zero.")
+            quantidade = int(input("Digite novamente: "))
+
+        preco = float(input("Preço unitário: R$ "))
+        while preco <= 0:
+            print("O preço deve ser maior que zero.")
+            preco = float(input("Digite novamente: R$ "))
+
+        produto = {
+            "nome": nome,
+            "quantidade": quantidade,
+            "preco": preco
+        }
+
+        carrinho.append(produto)
+
+    except ValueError:
+        print("Valor inválido! Tente novamente.")
+        continue
+
+    continuar = input("Deseja adicionar outro produto? (s/n): ").lower()
+
+    if continuar != "s":
+        break
+
+
+print("\n--- CARRINHO DE COMPRAS ---")
+
+for produto in carrinho:
+    subtotal = produto["quantidade"] * produto["preco"]
+
+    print(f"\nProduto: {produto['nome']}")
+    print(f"Quantidade: {produto['quantidade']}")
+    print(f"Preço: R$ {produto['preco']:.2f}")
+    print(f"Subtotal: R$ {subtotal:.2f}")
+
+print(f"\nTOTAL DA COMPRA: R$ {calcular_total(carrinho):.2f}")

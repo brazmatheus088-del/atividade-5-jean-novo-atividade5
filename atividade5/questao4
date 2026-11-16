@@ -1,24 +1,52 @@
-def cadastrar_usuario(nome, idade):
-    return {"nome": nome, "idade": idade}
+def calcular_media(notas):
+    return sum(notas) / len(notas)
 
 
-def validar_usuario(idade):
-    if idade >= 18:
-        return "Usuario maior de idade"
+estudantes = {}
+
+while True:
+    nome = input("\nNome do estudante: ").strip()
+
+    while not nome:
+        print("Nome inválido!")
+        nome = input("Digite o nome do estudante: ").strip()
+
+    notas = []
+
+    for i in range(3):
+        while True:
+            try:
+                nota = float(input(f"Digite a {i + 1}ª nota: "))
+
+                if 0 <= nota <= 10:
+                    notas.append(nota)
+                    break
+                else:
+                    print("A nota deve estar entre 0 e 10.")
+
+            except ValueError:
+                print("Digite um número válido!")
+
+    estudantes[nome] = notas
+
+    continuar = input("Deseja cadastrar outro estudante? (s/n): ").lower()
+
+    if continuar != "s":
+        break
+
+
+print("\n--- RESULTADO DOS ESTUDANTES ---")
+
+for nome, notas in estudantes.items():
+    media = calcular_media(notas)
+
+    if media >= 7:
+        situacao = "Aprovado"
+    elif media >= 5:
+        situacao = "Recuperação"
     else:
-        return "Usuario menor de idade"
+        situacao = "Reprovado"
 
-
-def exibir_usuario(usuario):
-    print("\nNome:", usuario["nome"])
-    print("Idade:", usuario["idade"])
-    print("Situacao:", validar_usuario(usuario["idade"]))
-
-
-usuario1 = cadastrar_usuario("Carlos", 25)
-usuario2 = cadastrar_usuario("Ana", 16)
-usuario3 = cadastrar_usuario("Pedro", 18)
-
-exibir_usuario(usuario1)
-exibir_usuario(usuario2)
-exibir_usuario(usuario3)
+    print(f"\nNome: {nome}")
+    print(f"Média: {media:.2f}")
+    print(f"Situação: {situacao}")

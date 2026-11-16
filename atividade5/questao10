@@ -1,0 +1,104 @@
+estudantes = []
+
+
+def cadastrar_estudante(estudantes):
+    nome = input("Nome do estudante: ").strip()
+
+    if not nome:
+        print("Nome inválido!")
+        return
+
+    try:
+        nota = float(input("Digite a nota do estudante: "))
+
+        if nota < 0 or nota > 10:
+            print("A nota deve estar entre 0 e 10!")
+            return
+
+        estudante = {
+            "nome": nome,
+            "nota": nota
+        }
+
+        estudantes.append(estudante)
+        print("Estudante cadastrado com sucesso!")
+
+    except ValueError:
+        print("Digite uma nota válida!")
+
+
+def calcular_media(estudantes):
+    if not estudantes:
+        return 0
+
+    soma = 0
+
+    for estudante in estudantes:
+        soma += estudante["nota"]
+
+    return soma / len(estudantes)
+
+
+def mostrar_resultados(estudantes):
+    print("\n--- RESULTADOS DOS ESTUDANTES ---")
+
+    if not estudantes:
+        print("Nenhum estudante cadastrado.")
+        return
+
+    for estudante in estudantes:
+        if estudante["nota"] >= 7:
+            situacao = "Aprovado"
+        else:
+            situacao = "Reprovado"
+
+        print(f"\nNome: {estudante['nome']}")
+        print(f"Nota: {estudante['nota']:.2f}")
+        print(f"Situação: {situacao}")
+
+    media = calcular_media(estudantes)
+
+    print(f"\nMédia geral da turma: {media:.2f}")
+
+
+def listar_aprovados(estudantes):
+    print("\n--- ESTUDANTES APROVADOS ---")
+
+    encontrou = False
+
+    for estudante in estudantes:
+        if estudante["nota"] >= 7:
+            print(
+                f"Nome: {estudante['nome']} "
+                f"| Nota: {estudante['nota']:.2f}"
+            )
+            encontrou = True
+
+    if not encontrou:
+        print("Nenhum estudante aprovado.")
+
+
+while True:
+    print("\n===== SISTEMA DE ANÁLISE DE DADOS =====")
+    print("1 - Cadastrar estudante")
+    print("2 - Mostrar resultados")
+    print("3 - Listar aprovados")
+    print("4 - Encerrar sistema")
+
+    opcao = input("Escolha uma opção: ")
+
+    if opcao == "1":
+        cadastrar_estudante(estudantes)
+
+    elif opcao == "2":
+        mostrar_resultados(estudantes)
+
+    elif opcao == "3":
+        listar_aprovados(estudantes)
+
+    elif opcao == "4":
+        print("Sistema encerrado com sucesso!")
+        break
+
+    else:
+        print("Opção inválida! Escolha entre 1 e 4.")

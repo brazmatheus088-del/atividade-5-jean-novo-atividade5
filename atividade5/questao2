@@ -1,38 +1,35 @@
-estoque = [
-    ["Arroz", 10],
-    ["Feijao", 3],
-    ["Acucar", 8],
-    ["Cafe", 2],
-    ["Macarrao", 6]
-]
+def cadastrar_produto(produtos, nome, preco):
+    produtos[nome] = preco
 
 
-def consultar_estoque():
-    print("\nESTOQUE ATUAL:")
-    for produto in estoque:
-        print(produto[0], "-", produto[1], "unidades")
+produtos = {}
 
+while True:
+    nome = input("\nDigite o nome do produto: ").strip()
 
-def atualizar_estoque(nome, quantidade):
-    for produto in estoque:
-        if produto[0].lower() == nome.lower():
-            produto[1] += quantidade
-            print("Estoque atualizado!")
-            return
-    print("Produto nao encontrado!")
+    while not nome:
+        print("O nome não pode ficar vazio!")
+        nome = input("Digite o nome do produto: ").strip()
 
+    try:
+        preco = float(input("Digite o preço do produto: R$ "))
 
-def verificar_estoque():
-    print("\nProdutos com estoque baixo:")
-    for produto in estoque:
-        if produto[1] < 5:
-            print(produto[0], "-", produto[1], "unidades")
+        while preco <= 0:
+            print("O preço deve ser maior que zero!")
+            preco = float(input("Digite um novo preço: R$ "))
 
+        cadastrar_produto(produtos, nome, preco)
 
-consultar_estoque()
+    except ValueError:
+        print("Digite um preço válido!")
+        continue
 
-atualizar_estoque("Feijao", 5)
-atualizar_estoque("Cafe", 4)
+    continuar = input("Deseja cadastrar outro produto? (s/n): ").lower()
 
-consultar_estoque()
-verificar_estoque()
+    if continuar != "s":
+        break
+
+print("\n--- PRODUTOS CADASTRADOS ---")
+
+for nome, preco in produtos.items():
+    print(f"{nome}: R$ {preco:.2f}")

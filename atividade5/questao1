@@ -1,19 +1,25 @@
-def calcular_media(nota1, nota2):
-    media = (nota1 + nota2) / 2
-    return media
+def autenticar(usuario, senha):
+    usuario_correto = "admin"
+    senha_correta = "123456"
+
+    return usuario == usuario_correto and senha == senha_correta
 
 
-def exibir_resultado(media):
-    print(f"Media: {media:.2f}")
+tentativas = 0
+autorizado = False
 
-    if media >= 7:
-        print("Situacao: Aprovado")
+while tentativas < 3:
+    usuario = input("Digite o usuário: ")
+    senha = input("Digite a senha: ")
+
+    if autenticar(usuario, senha):
+        print("Acesso autorizado!")
+        autorizado = True
+        break
     else:
-        print("Situacao: Reprovado")
+        tentativas += 1
+        print("Usuário ou senha incorretos!")
+        print(f"Tentativas restantes: {3 - tentativas}")
 
-
-nota1 = float(input("Digite a primeira nota: "))
-nota2 = float(input("Digite a segunda nota: "))
-
-media = calcular_media(nota1, nota2)
-exibir_resultado(media)
+if not autorizado:
+    print("Acesso bloqueado! Número máximo de tentativas excedido.")

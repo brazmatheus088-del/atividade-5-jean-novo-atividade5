@@ -1,0 +1,24 @@
+def cadastrar_usuario(nome, idade):
+    return {"nome": nome, "idade": idade}
+
+
+def validar_usuario(idade):
+    if idade >= 18:
+        return "Usuario maior de idade"
+    else:
+        return "Usuario menor de idade"
+
+
+def exibir_usuario(usuario):
+    print("\nNome:", usuario["nome"])
+    print("Idade:", usuario["idade"])
+    print("Situacao:", validar_usuario(usuario["idade"]))
+
+
+usuario1 = cadastrar_usuario("Carlos", 25)
+usuario2 = cadastrar_usuario("Ana", 16)
+usuario3 = cadastrar_usuario("Pedro", 18)
+
+exibir_usuario(usuario1)
+exibir_usuario(usuario2)
+exibir_usuario(usuario3)

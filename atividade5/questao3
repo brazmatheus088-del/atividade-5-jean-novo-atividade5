@@ -1,19 +1,27 @@
-dados = 100
+def contar_palavras(frase):
+    frase = frase.lower()
 
-print("Valor:", dados)
-print("Tipo:", type(dados))
+    # Remove pontuações simples
+    for caractere in ".,!?;:":
+        frase = frase.replace(caractere, "")
 
-dados = "100"
+    palavras = frase.split()
+    frequencia = {}
 
-print("Valor:", dados)
-print("Tipo:", type(dados))
+    for palavra in palavras:
+        if palavra in frequencia:
+            frequencia[palavra] += 1
+        else:
+            frequencia[palavra] = 1
+
+    return frequencia
 
 
-def analisar_tipo(valor):
-    return type(valor).__name__
+frase = input("Digite uma frase: ")
 
+resultado = contar_palavras(frase)
 
-print(analisar_tipo(10))
-print(analisar_tipo(5.5))
-print(analisar_tipo("Python"))
-print(analisar_tipo([1, 2, 3]))
+print("\n--- FREQUÊNCIA DAS PALAVRAS ---")
+
+for palavra, quantidade in resultado.items():
+    print(f"{palavra}: {quantidade}")

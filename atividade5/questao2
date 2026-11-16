@@ -1,0 +1,38 @@
+estoque = [
+    ["Arroz", 10],
+    ["Feijao", 3],
+    ["Acucar", 8],
+    ["Cafe", 2],
+    ["Macarrao", 6]
+]
+
+
+def consultar_estoque():
+    print("\nESTOQUE ATUAL:")
+    for produto in estoque:
+        print(produto[0], "-", produto[1], "unidades")
+
+
+def atualizar_estoque(nome, quantidade):
+    for produto in estoque:
+        if produto[0].lower() == nome.lower():
+            produto[1] += quantidade
+            print("Estoque atualizado!")
+            return
+    print("Produto nao encontrado!")
+
+
+def verificar_estoque():
+    print("\nProdutos com estoque baixo:")
+    for produto in estoque:
+        if produto[1] < 5:
+            print(produto[0], "-", produto[1], "unidades")
+
+
+consultar_estoque()
+
+atualizar_estoque("Feijao", 5)
+atualizar_estoque("Cafe", 4)
+
+consultar_estoque()
+verificar_estoque()
